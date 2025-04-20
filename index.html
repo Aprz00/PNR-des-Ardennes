@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvrez l'Observatoire du territoire du Parc Naturel Régional des Ardennes, ses paysages, sa biodiversité et ses projets.">
+    <meta name="author" content="Perez Lisea Alejandro">
+    <title>Observatoire du territoire du PNR des Ardennes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            position: relative;
+            height: 600px;
+            background-image: url('https://img1.oastatic.com/img2/45229977/max/variant.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px;
+            color: white;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .header-content {
+            position: relative;
+            max-width: 900px;
+            z-index: 1;
+            margin-left: 140px;
+        }
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        header p.subtitle {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        header p.author {
+            font-size: 1em;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 120px;
+            z-index: 1;
+        }
+        nav {
+            background-color: #2e7d32;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        nav a:hover {
+            background-color: #1b5e20;
+            transform: scale(1.05);
+        }
+        nav a.active {
+            background-color: #1b5e20;
+            font-weight: 700;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            min-height: 400px;
+        }
+        .section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+        .section.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        .section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2e7d32;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 10px;
+        }
+        .storymap-card {
+            display: flex;
+            align-items: center;
+            background-color: #2e2e2e;
+            border: 2px solid #4682b4;
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+        .storymap-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .storymap-card .thumbnail {
+            width: 200px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
+            transition: opacity 0.3s ease;
+        }
+        .storymap-card:hover .thumbnail {
+            opacity: 0.9;
+        }
+        .storymap-card .content {
+            flex: 1;
+        }
+        .storymap-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .storymap-card p {
+            font-size: 1em;
+            color: #d3d3d3;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        .back-to-top:hover {
+            opacity: 1;
+        }
+        footer {
+            background-color: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: #a5d6a7;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://www.parc-naturel-ardennes.fr/imsts/logo-rond-PNR@2x.png" alt="Logo PNR des Ardennes" class="logo">
+        <div class="header-content">
+            <h1>Observatoire du territoire du PNR des Ardennes</h1>
+            <p class="subtitle">Découvrez les paysages, la biodiversité et les projets du Parc Naturel Régional des Ardennes</p>
+            <p class="author">Perez Lisea Alejandro</p>
+        </div>
+    </header>
+    <nav>
+        <a href="#introduction" class="tab-link active" data-tab="introduction">Introduction</a>
+        <a href="#geographie" class="tab-link" data-tab="geographie">Géographie</a>
+        <a href="#patrimoine-culturel" class="tab-link" data-tab="patrimoine-culturel">Patrimoine culturel</a>
+        <a href="#patrimoine-naturel" class="tab-link" data-tab="patrimoine-naturel">Patrimoine naturel</a>
+        <a href="#amenagement" class="tab-link" data-tab="amenagement">Aménagement</a>
+    </nav>
+    <div class="container">
+        <!-- Section 1 : Introduction -->
+        <div class="section active" id="introduction">
+            <h2>Introduction à l’Observatoire du territoire</h2>
+            <a href="https://storymaps.arcgis.com/stories/0fb8fc460ee44966a5c47c290752ad70" target="_blank" class="storymap-card">
+                <img src="https://www.explore-grandest.com/wp-content/uploads/2023/01/67521340-10216538505489207-4944298756959895552-n-0x870.jpg" alt="Aperçu Introduction" class="thumbnail">
+                <div class="content">
+                    <h3>Introduction</h3>
+                    <p>Explorez une introduction interactive au Parc Naturel Régional des Ardennes et découvrez ses caractéristiques uniques.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Section 2 : Géographie -->
+        <div class="section" id="geographie">
+            <h2>Géographie du territoire</h2>
+            <a href="https://storymaps.arcgis.com/stories/d38b4b21993d42e39cd0cd4946e69cdd" target="_blank" class="storymap-card">
+                <img src="https://eioupi3h2a9.exactdn.com/wp-content/uploads/2016/09/Photo-escapardenne-etape-4-photo-18-site-confluence-1024x682-800x533.jpg?strip=all&lossy=1&quality=90&webp=90&ssl=1" alt="Aperçu Géographie" class="thumbnail">
+                <div class="content">
+                    <h3>Géographie</h3>
+                    <p>Découvrez les caractéristiques géographiques de notre territoire.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Section 3 : Patrimoine culturel et paysager -->
+        <div class="section" id="patrimoine-culturel">
+            <h2>Patrimoine culturel et paysager</h2>
+            <a href="https://storymaps.arcgis.com/stories/6d6c3a199fdd47009fd6eeb32df64d5f" target="_blank" class="storymap-card">
+                <img src="https://www.parc-naturel-ardennes.fr/wp-content/uploads/2024/11/carte-territoire@2x.png" alt="Aperçu Patrimoine Culturel" class="thumbnail">
+                <div class="content">
+                    <h3>Patrimoine culturel et naturel</h3>
+                    <p>Explorez l’héritage culturel et naturel de la région.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Section 4 : Patrimoine naturel et biodiversité -->
+        <div class="section" id="patrimoine-naturel">
+            <h2>Patrimoine naturel et biodiversité</h2>
+            <a href="https://storymaps.arcgis.com/stories/bcdbe85c062f45cbb14d4c707529b270" target="_blank" class="storymap-card">
+                <img src="https://cdn-s-www.republicain-lorrain.fr/images/A97F2DF8-C0CF-4BE5-9DBC-5FEC5CD18F6C/NW_raw/le-vol-majestueux-d-une-cigogne-noire-saisi-par-notre-correspondante-marianon-duchalet-au-dessus-d-un-village-du-jarnisy-cet-oiseau-d-une-grande-elegance-reapparaitrait-a-de-rares-occasions-en-lorraine-photo-rl-1698936762.jpg" alt="Aperçu Biodiversité" class="thumbnail">
+                <div class="content">
+                    <h3>Biodiversité</h3>
+                    <p>Découvrez la richesse de la biodiversité locale.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Section 5 : Aménagement du territoire -->
+        <div class="section" id="amenagement">
+            <h2>Aménagement du territoire</h2>
+            <a href="https://storymaps.arcgis.com/stories/b08d72d8bbdc465aa614cbf9025fedc6" target="_blank" class="storymap-card">
+                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/531817884.jpg?k=64c4d375b0df3a5323f84d0b5fa1bad058a8ec70eb47ed7914117c76dbdfb254&o=&hp=1" alt="Aperçu Aménagement" class="thumbnail">
+                <div class="content">
+                    <h3>Aménagement du territoire</h3>
+                    <p>Apprenez-en plus sur l’évolution et l’aménagement du territoire.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top" title="Retour en haut">↑</a>
+
+    <footer>
+        <p>Observatoire du territoire du PNR des Ardennes</p>
+        <p>Pour en savoir plus, visitez <a href="https://www.parc-naturel-ardennes.fr" target="_blank">le site officiel du PNR des Ardennes</a>.</p>
+        <p>Projet réalisé par Perez Lisea Alejandro – 2025</p>
+    </footer>
+
+    <script>
+        // Gestion des onglets avec transition
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const sections = document.querySelectorAll('.section');
+        const container = document.querySelector('.container');
+        let isTransitioning = false;
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                if (isTransitioning) return;
+                isTransitioning = true;
+
+                tabLinks.forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
+
+                const currentSection = document.querySelector('.section.active');
+                const targetSectionId = this.getAttribute('data-tab');
+                const targetSection = document.getElementById(targetSectionId);
+
+                if (currentSection === targetSection) {
+                    isTransitioning = false;
+                    return;
+                }
+
+                if (currentSection) {
+                    currentSection.classList.remove('active');
+                }
+
+                setTimeout(() => {
+                    targetSection.classList.add('active');
+
+                    // Ajuster la hauteur du conteneur pour qu'elle corresponde à la section active
+                    const sectionHeight = targetSection.offsetHeight;
+                    container.style.height = `${sectionHeight}px`;
+
+                    isTransitioning = false;
+                }, 500);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.tab-link.active').click();
+        });
+
+        const backToTop = document.querySelector('.back-to-top');
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
